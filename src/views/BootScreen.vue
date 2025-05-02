@@ -22,6 +22,8 @@ const bootLines = [
 ]
 
 onMounted(async () => {
+  await document.fonts.load('128px "Anonymous Pro-Bold"')
+  await document.fonts.load('18px "Anonymous Pro-Regular"')
   await document.fonts.ready
   initCRT()
 })

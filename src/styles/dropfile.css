@@ -4,11 +4,11 @@
 }
 @font-face {
     font-family: 'Anonymous Pro-Regular';
-    src: url(src/assets/fonts/AnonymousPro-Regular.ttf);
+    src: url(../../public/fonts/AnonymousPro-Regular.woff2);
     font-weight: 400;
 }
 @font-face {
     font-family: 'Anonymous Pro-Bold';
-    src: url(src/assets/fonts/AnonymousPro-Bold.ttf);
+    src: url(../../public/fonts/AnonymousPro-Bold.woff2);
     font-weight: 700;
 }
