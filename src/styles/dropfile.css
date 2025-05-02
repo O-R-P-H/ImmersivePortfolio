@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'Anonymous Pro-Regular';
+    src: url(src/assets/fonts/AnonymousPro-Regular.ttf);
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Anonymous Pro-Bold';
+    src: url(src/assets/fonts/AnonymousPro-Bold.ttf);
+    font-weight: 700;
+}
