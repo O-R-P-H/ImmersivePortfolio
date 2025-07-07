@@ -112,7 +112,7 @@ function initCRT() {
     const baseText = bootLines[currentLine]
     const maxDots = 46 - baseText.length - 3
 
-    if (state === 'typing' && elapsed - lastTime > 50) {
+    if (state === 'typing' && elapsed - lastTime > 15) {
       if (currentDot < maxDots) {
         currentDot++
         lines[currentLine] = baseText + '.'.repeat(currentDot)
@@ -122,7 +122,7 @@ function initCRT() {
         state = 'waiting'
         lastTime = elapsed
       }
-    } else if (state === 'waiting' && elapsed - lastTime > 300) {
+    } else if (state === 'waiting' && elapsed - lastTime > 100) {
       lines[currentLine] = baseText + '.'.repeat(maxDots) + ' ok'
       drawText()
       state = 'done'

@@ -13,8 +13,6 @@ const emit = defineEmits(['start'])
 
 onMounted(async () => {
   await document.fonts.ready
-  await document.fonts.load('128px "Anonymous Pro-Bold"')
-  await document.fonts.load('18px "Anonymous Pro-Regular"')
   initCRT()
 })
 
@@ -52,14 +50,18 @@ function initCRT() {
   renderer.setSize(canvas.width, canvas.height)
   container.value.appendChild(renderer.domElement)
 
-  // Button dimensions
   const btnWidth = 438
   const btnHeight = 64
   const titleY = 180
   const btnX = (canvas.width - btnWidth) / 2
   const btnY = titleY + 140 + 105
 
+  const checkboxSize = 20
+  const checkboxX = canvas.width / 2 - 110
+  const checkboxY = btnY + btnHeight + 32
+
   let isHovered = false
+  let isGamemodeEnabled = true // ✅ по умолчанию включено
   let hoverAlpha = 0
   let hoverTarget = 0
 
@@ -70,15 +72,13 @@ function initCRT() {
     ctx.textAlign = 'center'
     ctx.textBaseline = 'top'
 
-    // Title
     ctx.font = '128px "Anonymous Pro-Bold", monospace'
     ctx.fillText('O_R_P_H', canvas.width / 2, titleY)
 
-    // Subtitle
     ctx.font = '18px "Anonymous Pro-Regular", monospace'
     ctx.fillText('software developer/designer/artist', canvas.width / 2, titleY + 140)
 
-    // Button shape
+    // Кнопка
     ctx.beginPath()
     ctx.moveTo(btnX + 10, btnY)
     ctx.lineTo(btnX + btnWidth - 10, btnY)
@@ -91,65 +91,78 @@ function initCRT() {
     ctx.quadraticCurveTo(btnX, btnY, btnX + 10, btnY)
     ctx.closePath()
 
-    // Hover fill
     if (hoverAlpha > 0) {
       ctx.fillStyle = `rgba(230, 230, 230, ${hoverAlpha})`
       ctx.fill()
     }
 
-    // Border always
     ctx.strokeStyle = '#e6e6e6'
     ctx.lineWidth = 1
     ctx.stroke()
 
-    // Button text
     ctx.font = '40px "Anonymous Pro-Regular", monospace'
     ctx.textBaseline = 'middle'
     ctx.fillStyle = hoverAlpha > 0.5 ? 'black' : '#e6e6e6'
     ctx.fillText('start', canvas.width / 2, btnY + btnHeight / 2)
 
+    // ✅ Чекбокс
+    ctx.textAlign = 'left'
+    ctx.font = '18px "Anonymous Pro-Regular", monospace'
+    ctx.fillStyle = '#e6e6e6'
+    ctx.fillText('enable gamemode view', checkboxX + checkboxSize + 12, checkboxY + checkboxSize / 2)
+
+    ctx.strokeRect(checkboxX, checkboxY, checkboxSize, checkboxSize)
+    if (isGamemodeEnabled) {
+      ctx.fillStyle = '#e6e6e6'
+      ctx.fillRect(checkboxX + 4, checkboxY + 4, checkboxSize - 8, checkboxSize - 8)
+    }
+
     texture.needsUpdate = true
   }
 
-  document.fonts.load('128px "Anonymous Pro-Bold"').then(() => {
-    drawUI()
-  })
+  drawUI()
 
-  // Hover logic
+  // Hover
   renderer.domElement.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX
     const mouseY = e.clientY
-    const hovered =
-        mouseX >= btnX &&
-        mouseX <= btnX + btnWidth &&
-        mouseY >= btnY &&
-        mouseY <= btnY + btnHeight
 
-    if (hovered !== isHovered) {
-      isHovered = hovered
+    const hoveredButton = mouseX >= btnX && mouseX <= btnX + btnWidth &&
+        mouseY >= btnY && mouseY <= btnY + btnHeight
+
+    const hoveredCheckbox = mouseX >= checkboxX && mouseX <= checkboxX + checkboxSize &&
+        mouseY >= checkboxY && mouseY <= checkboxY + checkboxSize
+
+    if (hoveredButton !== isHovered) {
+      isHovered = hoveredButton
       hoverTarget = isHovered ? 1 : 0
     }
 
-    renderer.domElement.style.cursor = hovered ? 'pointer' : 'default'
+    renderer.domElement.style.cursor = (hoveredButton || hoveredCheckbox) ? 'pointer' : 'default'
   })
 
-  // Click logic
+  // Click
   renderer.domElement.addEventListener('click', (e) => {
     const mouseX = e.clientX
     const mouseY = e.clientY
-    const clicked =
-        mouseX >= btnX &&
-        mouseX <= btnX + btnWidth &&
-        mouseY >= btnY &&
-        mouseY <= btnY + btnHeight
 
-    if (clicked) {
-      emit('start')
+    const clickedButton = mouseX >= btnX && mouseX <= btnX + btnWidth &&
+        mouseY >= btnY && mouseY <= btnY + btnHeight
+
+    const clickedCheckbox = mouseX >= checkboxX && mouseX <= checkboxX + checkboxSize &&
+        mouseY >= checkboxY && mouseY <= checkboxY + checkboxSize
+
+    if (clickedButton) {
+      emit('start', { gamemode: isGamemodeEnabled })
+    }
+
+    if (clickedCheckbox) {
+      isGamemodeEnabled = !isGamemodeEnabled
+      drawUI()
     }
   })
 
   function animate(t) {
-    // Fade hover
     const fadeSpeed = 0.1
     if (Math.abs(hoverAlpha - hoverTarget) > 0.01) {
       hoverAlpha += (hoverTarget - hoverAlpha) * fadeSpeed
@@ -164,6 +177,9 @@ function initCRT() {
   animate()
 }
 </script>
+
+
+
 
 <style scoped>
 .crt-container {
