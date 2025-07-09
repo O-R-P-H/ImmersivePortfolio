@@ -13,6 +13,7 @@
     font-weight: 700;
 }
 html, body, #app {
+    scroll-behavior: smooth;
     margin: 0;
     padding: 0;
     background: black;
@@ -22,4 +23,25 @@ html, body, #app {
 }
 .canvas{
     pointer-events: none;
+}
+/* Для Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;            /* ширина вертикального скроллбара */
+    height: 8px;           /* высота горизонтального */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* прозрачный фон трека */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: white;      /* белый ползунок */
+    border-radius: 10px;
+    border: none;
+}
+
+/* Для Firefox */
+* {
+    scrollbar-color: white transparent; /* белый ползунок, прозрачный трек */
+    scrollbar-width: auto;              /* тонкий скроллбар */
 }

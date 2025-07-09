@@ -88,6 +88,6 @@ body {
   margin: 0;
   background: black;
   font-family: "Anonymous Pro-Regular", monospace;
-  color: #e6e6e6;
+  color: #dfdfdf;
 }
 </style>
