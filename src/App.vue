@@ -55,7 +55,7 @@ function handleMainScreenStart({ gamemode }) {
 // Полноэкранный режим
 async function enterFullscreen() {
   try {
-    const el = fullscreenElement.value || document.documentElement
+    const el = document.documentElement
     if (el.requestFullscreen) {
       await el.requestFullscreen()
     } else if (el.webkitRequestFullscreen) {

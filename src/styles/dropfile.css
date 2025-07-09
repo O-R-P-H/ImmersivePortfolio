@@ -20,3 +20,6 @@ html, body, #app {
     height: 100%;
     overflow: auto;
 }
+.canvas{
+    pointer-events: none;
+}

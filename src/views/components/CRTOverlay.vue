@@ -54,6 +54,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.canvas{
+  pointer-events: none;
+}
 .crt-overlay {
   position: fixed;
   top: 0;
