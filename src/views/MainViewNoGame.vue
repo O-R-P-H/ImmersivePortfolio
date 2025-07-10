@@ -343,7 +343,30 @@ const toggleTheme = () => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap');
+@media (min-aspect-ratio: 16/9) {
+  .alias {
+    margin-top: 24vh !important; /* Используем viewport height для адаптивности */
+  }
+  .portfolio hr{
+    margin-top: 38vh !important;
+  }
+  :fullscreen .portfolio hr{
+    margin-top: 45vh !important;
+  }
+  .projects{
+    justify-items: center;
+  }
+  :fullscreen .projects{
+    margin-top: 200px !important;
+  }
+  :fullscreen .project {
+    scale: 120%;
 
+  }
+  :fullscreen .contacts hr{
+    margin-top: 150px !important;
+  }
+}
 /* Общие стили для обеих тем */
 a:hover, p:hover, nav:hover, span:hover, h1:hover, h2:hover {
   cursor: pointer;
