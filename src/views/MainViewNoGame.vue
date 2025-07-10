@@ -15,6 +15,32 @@
         />
       </nav>
     </header>
+    <header class="mobile-nav">
+      <span class="lang">eng</span>
+
+      <!-- Кнопка бургер-меню -->
+      <button class="menu-toggle" @click="toggleMenu">
+        <span :class="{'line': true, 'active': isMenuOpen}"></span>
+        <span :class="{'line': true, 'active': isMenuOpen}"></span>
+        <span :class="{'line': true, 'active': isMenuOpen}"></span>
+      </button>
+
+      <!-- Выпадающее меню -->
+      <nav class="mobile-menu" :class="{'open': isMenuOpen}">
+        <a href="" @click="closeMenu">home</a>
+        <a href="#skills" @click="closeMenu">skills</a>
+        <a href="#portfolio" @click="closeMenu">portfolio</a>
+        <a href="#contacts" @click="closeMenu">contacts</a>
+      </nav>
+
+      <!-- Иконка темы -->
+      <img
+          :src="themeIcon"
+          alt="toggle theme"
+          class="theme-icon"
+          @click="toggleTheme"
+      />
+    </header>
 
     <main>
       <section class="intro">
@@ -158,6 +184,16 @@ import CRTOverlay from "./components/CRTOverlay.vue";
 
 const isLightTheme = ref(false);
 
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
+};
 const copyToClipboard = (text, event) => {
   const button = event?.currentTarget;
 
@@ -674,8 +710,124 @@ b {
   scrollbar-color: black transparent !important; /* Чёрный ползунок в светлой теме */
 }
 
-
+@media (min-width: 1025px) {
+  .mobile-nav{display: none}
+}
 @media (max-width: 1024px) {
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+  }
+
+  .page.light-theme .mobile-nav {
+    background: inherit;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .lang {
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 16px;
+  }
+
+  .theme-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 34px;
+    height: 18px;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
+  }
+
+  .page.light-theme .line {
+    background: black;
+  }
+
+  .line.active:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .line.active:nth-child(2) {
+    opacity: 0;
+  }
+
+  .line.active:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .page.light-theme .mobile-menu {
+    background: white;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-menu a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Anonymous Pro', monospace;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+  }
+
+  .page.light-theme .mobile-menu a {
+    color: black;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+  .nav{
+    display: none;
+  }
   .page {
     padding: 40px 24px;
   }
@@ -685,7 +837,50 @@ b {
   }
 
   .intro h1 {
+    margin-top: 150px;
     font-size: 48px;
+  }
+  .skills hr{
+    margin-top: 50px;
+  }
+  .alias{
+    margin-top: 240px;
+  }
+  #skills{margin-bottom: 60px}
+  :fullscreen .skills hr{
+    margin-top: 140px;
+  }
+  :fullscreen #skills{
+    margin-bottom: 60px;
+  }
+  .description{
+    font-size: 24px;
+  }
+  .portfolio hr{
+    margin-top: 50px;
+  }
+  :fullscreen .portfolio hr{
+    margin-top: 40px;
+  }
+  #portfolio{
+    margin-bottom: 60px;
+  }
+  .portfolio .downarrow{display: none}
+  #contacts{
+    margin-bottom: 80px;
+  }
+  .contacts ul{
+    font-size: 14px;
+  }
+  .contacts button{
+    padding: 2px 5px;
+    text-align: center;
+    font-size: 12px;
+    height: 25px;
+    width: 60px;
+  }
+  .contacts li{
+    margin-bottom: 3px;
   }
 }
 </style>
