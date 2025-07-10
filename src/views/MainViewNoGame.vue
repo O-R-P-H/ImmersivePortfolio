@@ -100,7 +100,7 @@
             <p>{{ t('csmDescription') }}</p>
           </div>
           <div class="project">
-            <img src="../../src/assets/img/plants_prj.png" alt="Minimal Player Screenshot"/>
+            <img :src="plantImage" alt="Minimal Player Screenshot"/>
             <h3>{{ t('plantsNaming') }}</h3>
             <p>{{ t('plantsDescription') }}</p>
           </div>
@@ -168,6 +168,10 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import CRTOverlay from "./components/CRTOverlay.vue";
+import toggleWhite from '@/assets/img/switch_theme_white.svg';
+import toggleBlack from '@/assets/img/switch_theme_black.svg';
+
+
 
 const isLightTheme = ref(false);
 const isMenuOpen = ref(false);
@@ -307,8 +311,8 @@ onMounted(() => {
 
 const themeIcon = computed(() => {
   return isLightTheme.value
-      ? '../../src/assets/img/switch_theme_white.svg'
-      : '../../src/assets/img/switch_theme_black.svg';
+      ? toggleWhite
+      : toggleBlack
 });
 
 const toggleTheme = () => {
@@ -764,7 +768,7 @@ b {
     left: 0;
     right: 0;
     height: 60px;
-    background: inherit;
+    background: inherit !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -879,9 +883,9 @@ b {
   .projects {
     grid-template-columns: 1fr;
   }
-   .projects h3{
-     font-size: 26px;
-   }
+  .projects h3{
+    font-size: 26px;
+  }
   .intro h1 {
     margin-top: 150px;
     font-size: 48px;
