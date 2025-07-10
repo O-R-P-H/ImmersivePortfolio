@@ -8,7 +8,6 @@
       <BootScreen v-if="currentView === 'boot'" @done="goToMidScreen" />
       <MidScreen v-else-if="currentView === 'mid'" @finish="goToMainScreen" />
       <MainScreen v-else-if="currentView === 'main'" @start="handleMainScreenStart" />
-      <TerminalView v-else-if="currentView === 'terminal'" />
       <MainViewNoGame v-else-if="currentView === 'html'" />
     </template>
   </div>
@@ -21,7 +20,6 @@ import { ref, onMounted } from 'vue'
 import BootScreen from './views/BootScreen.vue'
 import MidScreen from './views/MidScreen.vue'
 import MainScreen from './views/MainScreen.vue'
-import TerminalView from './views/TerminalView.vue'
 import MainViewNoGame from './views/MainViewNoGame.vue'
 import FullscreenNotice from './views/FullscreenNotice.vue'
 

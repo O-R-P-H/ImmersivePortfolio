@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import crtFragment from '../shaders/crt.frag?raw'
 import screenVertex from '../shaders/screen.vert?raw'
@@ -11,21 +11,40 @@ import screenVertex from '../shaders/screen.vert?raw'
 const container = ref(null)
 const emit = defineEmits(['finish'])
 
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
 onMounted(async () => {
-  await document.fonts.load('128px "Anonymous Pro-Bold"')
-  await document.fonts.load('18px "Anonymous Pro-Regular"')
+  // Оптимизированная загрузка шрифтов для разных устройств
+  await document.fonts.load(isMobile ? '64px "Anonymous Pro-Bold"' : '128px "Anonymous Pro-Bold"')
+  await document.fonts.load(isMobile ? '14px "Anonymous Pro-Regular"' : '18px "Anonymous Pro-Regular"')
   await document.fonts.ready
   initCRT()
 })
 
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
+function handleResize() {
+  initCRT()
+}
+
 function initCRT() {
+  // Очистка предыдущего рендера
+  if (container.value?.firstChild) {
+    container.value.removeChild(container.value.firstChild)
+  }
+
+  const width = window.innerWidth
+  const height = window.innerHeight
+
   const canvas = document.createElement('canvas')
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+  canvas.width = width
+  canvas.height = height
   const ctx = canvas.getContext('2d')
 
   const scene = new THREE.Scene()
-  const camera = new THREE.OrthographicCamera(0, canvas.width, canvas.height, 0, 0.1, 10)
+  const camera = new THREE.OrthographicCamera(0, width, height, 0, 0.1, 10)
   camera.position.z = 1
 
   const texture = new THREE.CanvasTexture(canvas)
@@ -37,32 +56,38 @@ function initCRT() {
     uniforms: {
       uTexture: { value: texture },
       uTime: { value: 0.0 },
-      uResolution: { value: new THREE.Vector2(canvas.width, canvas.height) }
+      uResolution: { value: new THREE.Vector2(width, height) }
     },
     vertexShader: screenVertex,
     fragmentShader: crtFragment
   })
 
-  const geometry = new THREE.PlaneGeometry(canvas.width, canvas.height)
+  const geometry = new THREE.PlaneGeometry(width, height)
   const mesh = new THREE.Mesh(geometry, material)
-  mesh.position.set(canvas.width / 2, canvas.height / 2, 0)
+  mesh.position.set(width / 2, height / 2, 0)
   scene.add(mesh)
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true })
-  renderer.setSize(canvas.width, canvas.height)
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    powerPreference: isMobile ? 'low-power' : 'high-performance'
+  })
+  renderer.setSize(width, height)
   container.value.appendChild(renderer.domElement)
 
-  // Рисуем текст сразу
+  // Рисуем текст
   ctx.fillStyle = 'black'
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.fillRect(0, 0, width, height)
   ctx.fillStyle = '#e6e6e6'
-  ctx.font = '22px "Anonymous Pro-Regular", monospace'
+
+  // Адаптивный размер шрифта
+  const fontSize = isMobile ? Math.min(18, width / 20) : 22
+  ctx.font = `${fontSize}px "Anonymous Pro-Regular", monospace`
   ctx.textBaseline = 'top'
 
   const text = 'all modules loaded successfully'
   const textWidth = ctx.measureText(text).width
-  const x = (canvas.width - textWidth) / 2
-  const y = canvas.height / 2
+  const x = (width - textWidth) / 2
+  const y = height / 2
   ctx.fillText(text, x, y)
 
   texture.needsUpdate = true
@@ -78,7 +103,7 @@ function initCRT() {
   // Переход к следующему экрану
   setTimeout(() => {
     emit('finish')
-  }, 1700)
+  }, isMobile ? 1200 : 1700) // Укороченное время для мобильных
 }
 </script>
 
@@ -88,5 +113,13 @@ function initCRT() {
   height: 100vh;
   background: black;
   overflow: hidden;
+  touch-action: none; /* Блокировка масштабирования на мобильных */
+}
+
+@media (max-width: 768px) {
+  .crt-container {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
 }
 </style>
