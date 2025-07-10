@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :class="{ 'light-theme': isLightTheme }">
     <header class="nav">
       <span class="lang">eng</span>
       <nav class="left_nav">
@@ -7,7 +7,12 @@
         <a href="#skills">skills</a>
         <a href="#portfolio">portfolio</a>
         <a href="#contacts">contacts</a>
-        <img src="../../src/assets/img/switch_theme_black.svg" alt="toggle theme" class="icon"/>
+        <img
+            :src="themeIcon"
+            alt="toggle theme"
+            class="icon"
+            @click="toggleTheme"
+        />
       </nav>
     </header>
 
@@ -58,7 +63,10 @@
         <div class="projects">
           <div class="project">
             <img src="../../src/assets/img/minplayer.png" alt="Minimal Player Screenshot"/>
-            <h3>/minimal player</h3>
+            <div style="display: flex; align-items: center;max-width: 540px; justify-content: space-between;">
+              <h3>/minimal player</h3>
+              <a target="_blank" href="https://diplom.tsukawa.ru"><button class="view_button">view</button></a>
+            </div>
             <p>As part of my pet project, I developed a minimalist music player using Vue 3, using Spotify as a key
               reference. The main goal of the project was to allow listeners to enjoy music in FLAC format. In addition
               to Vue, I utilized Electron, enabling the application to run not only in browsers but also natively on
@@ -67,53 +75,76 @@
               algorithms.</p>
           </div>
           <div class="project">
-            <img src="../../src/assets/img/minplayer.png" alt="Minimal Player Screenshot"/>
-            <h3>/minimal player</h3>
-            <p>As part of my pet project, I developed a minimalist music player using Vue 3, using Spotify as a key
-              reference. The main goal of the project was to allow listeners to enjoy music in FLAC format. In addition
-              to Vue, I utilized Electron, enabling the application to run not only in browsers but also natively on
-              macOS and Windows. During the development, I gained additional skills in deploying my software on servers,
-              learned to write the backend, designed the user interface, and worked with file compression
-              algorithms.</p>
+            <img src="../../src/assets/img/CSM_prj.png" alt="Minimal Player Screenshot"/>
+            <div style="display: flex;max-width: 540px; align-items: flex-start; justify-content: space-between;">
+              <h3 style="max-width: 420px">/personal account system for NN CSM</h3>
+              <a href="https://lk.nncsm.ru/" target="_blank"><button class="view_button">view</button></a>
+            </div>
+            <p>As part of this commercial project, I developed a personal account system for the Nizhny Novgorod Center for Standardization and Metrology using Vue 3. The goal was to create a convenient interface for clients to submit applications, track their status, and manage documents. The system integrates with the organization's internal services and provides role-based access for different user categories. During development, I worked with complex form validation, implemented real-time status updates, and ensured compatibility with legacy systems used by the organization.
+
+            </p>
           </div>
           <div class="project">
-            <img src="../../src/assets/img/minplayer.png" alt="Minimal Player Screenshot"/>
-            <h3>/minimal player</h3>
-            <p>As part of my pet project, I developed a minimalist music player using Vue 3, using Spotify as a key
-              reference. The main goal of the project was to allow listeners to enjoy music in FLAC format. In addition
-              to Vue, I utilized Electron, enabling the application to run not only in browsers but also natively on
-              macOS and Windows. During the development, I gained additional skills in deploying my software on servers,
-              learned to write the backend, designed the user interface, and worked with file compression
-              algorithms.</p>
+            <img src="../../src/assets/img/plants_prj.png" alt="Minimal Player Screenshot"/>
+            <h3>/PLANTS online store</h3>
+            <p>This pet project involved creating an e-commerce platform for selling houseplants using Vue 3. The store features product catalog with filters, shopping cart, and secure checkout. I implemented interactive plant care guides and a virtual "plant doctor" to help customers maintain their purchases. The project allowed me to deepen my knowledge of payment system integration, inventory management, and creating responsive product pages that work equally well on desktop and mobile devices.</p>
           </div>
           <div class="project">
-            <img src="../../src/assets/img/minplayer.png" alt="Minimal Player Screenshot"/>
-            <h3>/minimal player</h3>
-            <p>As part of my pet project, I developed a minimalist music player using Vue 3, using Spotify as a key
-              reference. The main goal of the project was to allow listeners to enjoy music in FLAC format. In addition
-              to Vue, I utilized Electron, enabling the application to run not only in browsers but also natively on
-              macOS and Windows. During the development, I gained additional skills in deploying my software on servers,
-              learned to write the backend, designed the user interface, and worked with file compression
-              algorithms.</p>
+            <img src="../../src/assets/img/choco_prj.png" alt="Minimal Player Screenshot"/>
+            <h3 style="max-width: 540px">/landing page for small business</h3>
+            <p>I created this landing page for a local chocolate artisan to showcase products and attract customers. Using Vue 3, I developed an interactive product gallery with 3D views, an order form with delivery options, and a section for customer testimonials. The page includes animation effects to highlight special offers and seasonal products. This project helped me master techniques for creating high-converting landing pages that effectively present small business offerings while maintaining fast load times and SEO optimization.</p>
           </div>
         </div>
       </section>
 
       <section class="contacts">
-        <h2 id="contacts">contacts</h2>
+        <hr/>
+        <a>
+          <div class="downarrow">
+          </div>
+        </a>
+        <div id="contacts"></div>
+        <h2>contacts</h2>
         <ul>
-          <li><span>&gt; name:</span> Nikita Vakhmianin</li>
-          <li><span>&gt; email:</span> nikitavahmanin@gmail.com
-            <button>write</button>
+          <li>
+            <div>
+              <span>&gt; name:</span> Nikita Vakhmianin
+
+            </div>
+            <button @click="(e) => copyToClipboard('Nikita Vakhmianin', e)">copy</button>
           </li>
-          <li><span>&gt; telegram:</span> @O_R_P_H
-            <button>write</button>
+          <li>
+            <div>
+              <span>&gt; email:</span> nikitavahmanin@gmail.com
+            </div>
+            <a href="mailto:nikitavahmanin@gmail.com?subject=Contact%20from%20portfolio" ><button>write</button></a>
           </li>
-          <li><span>&gt; github:</span> github.com/O-R-P-H
-            <button>view</button>
+          <li>
+            <div>
+              <span>&gt; telegram:</span> @O_R_P_H
+            </div>
+            <a href="https://t.me/O_R_P_H"
+               target="_blank"
+               rel="noopener noreferrer"> <button>write</button></a>
           </li>
-          <li><span>&gt; location:</span> Nizhny Novgorod, Russia</li>
-          <li><span>&gt; availability:</span> open to remote work / freelance</li>
+          <li>
+            <div><span>&gt; github:</span> github.com/O-R-P-H</div>
+            <a href="https://github.com/O-R-P-H"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="contact-button"><button>view</button></a>
+          </li>
+          <li>
+           <div>
+             <span>&gt; location:</span> Nizhny Novgorod, Russia
+
+           </div>
+            <button @click="(e) => copyToClipboard('Nizhny Novgorod, Russia', e)">copy</button>
+          </li>
+          <li>
+            <div>
+              <span>&gt; availability:</span> open to remote work / freelance
+            </div></li>
         </ul>
       </section>
     </main>
@@ -121,13 +152,97 @@
   </div>
 </template>
 
-
 <script setup>
-// No logic required for static layout
+import { ref, computed, onMounted, watch } from 'vue';
 import CRTOverlay from "./components/CRTOverlay.vue";
+
+const isLightTheme = ref(false);
+
+const copyToClipboard = (text, event) => {
+  const button = event?.currentTarget;
+
+  if (button) {
+    // Сохраняем оригинальный текст кнопки
+    const originalText = button.textContent;
+
+    // Меняем текст кнопки
+    button.textContent = 'copied!';
+    button.style.background = '#64c24d'; // Зеленый цвет для успеха
+    button.style.color = 'white';
+
+    // Копируем текст в буфер обмена
+    navigator.clipboard.writeText(text)
+        .then(() => {
+          console.log('Copied to clipboard:', text);
+        })
+        .catch(err => {
+          console.error('Failed to copy:', err);
+          // Fallback для старых браузеров
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand('copy');
+          } catch (fallbackErr) {
+            console.error('Fallback copy failed:', fallbackErr);
+          } finally {
+            document.body.removeChild(textarea);
+          }
+        });
+
+    // Возвращаем оригинальный текст через 2 секунды
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.style.background = '';
+      button.style.color = '';
+    }, 2000);
+  }
+};
+
+
+
+// Обработчик темы для корневого элемента
+watch(isLightTheme, (newVal) => {
+  const appElement = document.getElementById('app');
+  if (appElement) {
+    appElement.classList.toggle('light-theme', newVal);
+  }
+}, { immediate: true });
+
+// Проверяем сохраненную тему при загрузке
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    isLightTheme.value = savedTheme === 'light';
+  }
+
+  // Инициализация темы для корневого элемента
+  const appElement = document.getElementById('app');
+  if (appElement) {
+    appElement.classList.toggle('light-theme', isLightTheme.value);
+  }
+});
+
+const themeIcon = computed(() => {
+  return isLightTheme.value
+      ? '../../src/assets/img/switch_theme_white.svg'
+      : '../../src/assets/img/switch_theme_black.svg';
+});
+
+const toggleTheme = () => {
+  isLightTheme.value = !isLightTheme.value;
+  // Добавляем/удаляем класс к html элементу
+  document.documentElement.classList.toggle('light-theme', isLightTheme.value);
+  localStorage.setItem('theme', isLightTheme.value ? 'light' : 'dark');
+};
+
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap');
+
+/* Общие стили для обеих тем */
 a:hover, p:hover, nav:hover, span:hover, h1:hover, h2:hover {
   cursor: pointer;
   color: white;
@@ -138,30 +253,114 @@ a, p, nav, span, h1, h2 {
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
+.page {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: 'Anonymous Pro', monospace;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap');
+/* Темная тема (по умолчанию) */
+.page {
+  background: black;
+  color: #dfdfdf;
+}
+
+.page .nav {
+  background-color: inherit;
+}
+
+.page .tags span {
+  background: white;
+  color: black;
+}
+
+.page .view_button {
+  background-color: #dfdfdf;
+  color: black;
+}
+
+.page .contacts button {
+  background: white;
+  color: black;
+}
+
+/* Светлая тема */
+.page.light-theme {
+  background: white;
+  color: #333;
+}
+
+.downarrow {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.downarrow img {
+  animation: swing-vertical 2.3s ease-in-out infinite;
+  width: 20px;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+/* Темная тема - стрелка белая (исходное состояние) */
+.page .downarrow img {
+  filter: invert(0);
+}
+
+/* Светлая тема - стрелка черная */
+.page.light-theme .downarrow img {
+  filter: invert(1);
+}
+
+.page.light-theme .tags span {
+  background: black;
+  color: white;
+}
+
+.page.light-theme .view_button {
+  background-color: #333;
+  color: white;
+}
+
+.page.light-theme .contacts button {
+  background: black;
+  color: white;
+}
+
+.page.light-theme a:hover,
+.page.light-theme p:hover,
+.page.light-theme nav:hover,
+.page.light-theme span:hover,
+.page.light-theme h1:hover,
+.page.light-theme h2:hover {
+  color: black;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.page.light-theme .tags span:hover {
+  color: white !important;
+}
+/* Остальные стили остаются без изменений */
 b {
   color: white;
   font-family: "Anonymous Pro-Bold", sans-serif;
   animation: glowFlickerSharp 1.8s ease-out forwards;
 }
 
-.page {
-  max-width: 1440px;
-  margin: 0 auto;
-  background: black;
-  font-family: 'Anonymous Pro', monospace;
-  padding-left: 8vw;
-  padding-right: 8vw;
-}
-
 .nav {
-  background-color: black;
   height: 8vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 24px;
+  background-color: inherit;
 }
 
 .left_nav {
@@ -176,11 +375,20 @@ b {
   color: #dfdfdf;
 }
 
+.page.light-theme .nav nav a {
+  color: #333;
+}
+
 .nav nav a:hover {
   cursor: pointer;
   color: white;
   text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
   text-decoration: underline;
+}
+
+.page.light-theme .nav nav a:hover {
+  color: black;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .icon {
@@ -194,6 +402,10 @@ b {
   filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.9));
 }
 
+.page.light-theme .icon:hover {
+  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.7));
+}
+
 .intro h1 {
   font-family: "Anonymous Pro-Bold", sans-serif;
   font-size: 92px;
@@ -202,7 +414,6 @@ b {
   margin-top: 75px;
   animation: glowFlickerSharp 1.8s ease-out forwards;
 }
-
 
 @keyframes glowFlickerSharp {
   0% {
@@ -238,6 +449,10 @@ b {
   }
 }
 
+.page.light-theme b {
+  color: black;
+}
+
 .role {
   font-size: 32px;
   margin-top: 15px;
@@ -250,17 +465,27 @@ b {
   color: #ccc;
 }
 
+.page.light-theme .alias {
+  color: #666;
+}
+
 .skills hr {
   box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.3);
   border: 3px solid white;
   border-radius: 40px;
   bottom: 30px;
-  margin-top: 80px;
+  margin-top: 130px;
+}
 
+.page.light-theme .skills hr,
+.page.light-theme .portfolio hr,
+.page.light-theme .contacts hr {
+  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.3);
+  border: 3px solid black;
 }
 
 :fullscreen .skills hr {
-  margin-top: 165px;
+  margin-top: 220px;
 }
 
 .downarrow {
@@ -276,7 +501,6 @@ b {
   width: 20px;
   cursor: pointer;
 }
-
 
 @keyframes swing-vertical {
   0%, 100% {
@@ -298,7 +522,7 @@ b {
   text-align: center;
   font-size: 46px;
   font-weight: bold;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .tags {
@@ -308,7 +532,7 @@ b {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 12px;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .tags span:hover {
@@ -316,10 +540,12 @@ b {
   box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.3);
 }
 
+.page.light-theme .tags span:hover {
+  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.3);
+}
+
 .tags span {
   transition: all 0.3s ease-out;
-  background: white;
-  color: black;
   padding: 5px 14px;
   border-radius: 999px;
   font-size: 20px;
@@ -335,12 +561,11 @@ b {
   box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.3);
   border: 3px solid white;
   border-radius: 40px;
-  margin-top: 120px;
-
+  margin-top: 150px;
 }
 
 :fullscreen .portfolio hr {
-  margin-top: 185px;
+  margin-top: 220px;
 }
 
 :fullscreen #portfolio {
@@ -355,32 +580,60 @@ b {
 }
 
 .project img {
+  transition: all 0.3s ease-out;
+  margin-bottom: 16px;
   max-width: 540px;
   width: 100%;
   height: auto;
   border-radius: 8px;
   background: #222;
 }
-
+.project img:hover {
+  box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.15);
+  scale: 105%;
+}
 .project h3 {
-  margin-top: 16px;
   font-size: 32px;
   font-weight: bold;
 }
 
 .project p {
+  max-width: 540px;
   margin-top: 10px;
   font-size: 20px;
   line-height: 1.6;
 }
 
+.view_button {
+  cursor: pointer;
+  border-radius: 6px;
+  width: 60px;
+  height: 30px;
+  font-family: "Anonymous Pro-Bold", sans-serif;
+  font-size: 15px;
+  transition:all 0.2s ease-out;
+  border: none;
+}
+.view_button:hover {
+  scale: 105%;
+}
+.contacts hr {
+  box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.3);
+  border: 3px solid white;
+  border-radius: 40px;
+  margin-top: 100px;
+}
+
+:fullscreen .contacts hr {
+  margin-top: 70px;
+}
 .contacts {
-  margin-bottom: 400px;
+  margin-bottom: 200px;
 }
 
 .contacts ul {
   list-style: none;
-  font-size: 14px;
+  font-size: 24px;
   padding: 0;
   margin-top: 40px;
   line-height: 2;
@@ -389,17 +642,38 @@ b {
 .contacts li span {
   font-weight: bold;
 }
-
+.contacts li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .contacts button {
   margin-left: 10px;
   padding: 2px 10px;
-  font-size: 12px;
-  background: white;
-  color: black;
-  border-radius: 4px;
-  font-weight: bold;
   cursor: pointer;
+  border-radius: 6px;
+  text-align: center;
+  width: 80px;
+  height: 30px;
+  font-family: "Anonymous Pro-Bold", sans-serif;
+  font-size: 15px;
+  transition:all 0.2s ease-out;
+  border: none;
 }
+.page.light-theme ::-webkit-scrollbar-thumb {
+  background-color: black !important; /* Чёрный ползунок в светлой теме */
+}
+
+/* Для Firefox */
+.page {
+  scrollbar-color: white transparent;
+  scrollbar-width: auto;
+}
+
+.page.light-theme {
+  scrollbar-color: black transparent !important; /* Чёрный ползунок в светлой теме */
+}
+
 
 @media (max-width: 1024px) {
   .page {
@@ -415,4 +689,3 @@ b {
   }
 }
 </style>
-

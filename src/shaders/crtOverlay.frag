@@ -13,7 +13,7 @@ void main() {
   float scanline = 0.88 + 0.12 * sin(uv.y * uResolution.y * 1.5);
 
   // FLICKER
-  float flicker = 0.96 + 0.04 * sin(uTime * 100.0 + uv.x * 120.0);
+  float flicker = 0.96 + 0.01 * sin(uTime * 10.0 + uv.x * 120.0);
 
   // ЗЕРНО
   float noise = rand(uv + uTime) * 0.025;

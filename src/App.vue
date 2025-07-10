@@ -90,4 +90,19 @@ body {
   font-family: "Anonymous Pro-Regular", monospace;
   color: #dfdfdf;
 }
+
+#app {
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+/* Темная тема */
+#app {
+  background-color: black;
+}
+
+/* Светлая тема */
+#app.light-theme {
+  background-color: white;
+}
 </style>
