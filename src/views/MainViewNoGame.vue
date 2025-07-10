@@ -15,7 +15,7 @@
         />
       </nav>
     </header>
-    <header class="mobile-nav">
+    <header style="background-color: black" class="mobile-nav">
       <span class="lang" @click="toggleLanguage">{{ currentLanguage }}</span>
 
       <!-- Кнопка бургер-меню -->
@@ -87,7 +87,9 @@
             <img src="../../src/assets/img/minplayer.png" alt="Minimal Player Screenshot"/>
             <div style="display: flex; align-items: flex-start;max-width: 540px; justify-content: space-between;">
               <h3>{{ t('playerNaming') }}</h3>
-              <a target="_blank" href="https://diplom.tsukawa.ru"><button class="view_button">{{ t('view') }}</button></a>
+              <a target="_blank" href="https://diplom.tsukawa.ru">
+                <button class="view_button">{{ t('view') }}</button>
+              </a>
             </div>
             <p>{{ t('minimalPlayerDescription') }}</p>
           </div>
@@ -95,7 +97,9 @@
             <img src="../../src/assets/img/CSM_prj.png" alt="Minimal Player Screenshot"/>
             <div style="display: flex;max-width: 540px; align-items: flex-start; justify-content: space-between;">
               <h3 style="max-width: 420px">{{ t('csmNaming') }}</h3>
-              <a href="https://lk.nncsm.ru/" target="_blank"><button class="view_button">{{ t('view') }}</button></a>
+              <a href="https://lk.nncsm.ru/" target="_blank">
+                <button class="view_button">{{ t('view') }}</button>
+              </a>
             </div>
             <p>{{ t('csmDescription') }}</p>
           </div>
@@ -131,7 +135,9 @@
             <div>
               <span>&gt; {{ t('email') }}:</span> nikitavahmanin@gmail.com
             </div>
-            <a href="mailto:nikitavahmanin@gmail.com?subject=Contact%20from%20portfolio" ><button>{{ t('write') }}</button></a>
+            <a href="mailto:nikitavahmanin@gmail.com?subject=Contact%20from%20portfolio">
+              <button>{{ t('write') }}</button>
+            </a>
           </li>
           <li>
             <div>
@@ -139,14 +145,18 @@
             </div>
             <a href="https://t.me/O_R_P_H"
                target="_blank"
-               rel="noopener noreferrer"> <button>{{ t('write') }}</button></a>
+               rel="noopener noreferrer">
+              <button>{{ t('write') }}</button>
+            </a>
           </li>
           <li>
             <div><span>&gt; {{ t('github') }}:</span> github.com/O-R-P-H</div>
             <a href="https://github.com/O-R-P-H"
                target="_blank"
                rel="noopener noreferrer"
-               class="contact-button"><button>{{ t('view') }}</button></a>
+               class="contact-button">
+              <button>{{ t('view') }}</button>
+            </a>
           </li>
           <li>
             <div>
@@ -157,7 +167,8 @@
           <li>
             <div>
               <span>&gt; {{ t('availability') }}:</span> {{ t('availabilityText') }}
-            </div></li>
+            </div>
+          </li>
         </ul>
       </section>
     </main>
@@ -166,11 +177,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import {ref, computed, onMounted, watch} from 'vue';
 import CRTOverlay from "./components/CRTOverlay.vue";
 import toggleWhite from '@/assets/img/switch_theme_white.svg';
 import toggleBlack from '@/assets/img/switch_theme_black.svg';
-
 
 
 const isLightTheme = ref(false);
@@ -202,10 +212,10 @@ const translations = {
     view: 'view',
     write: 'write',
     copy: 'copy',
-    playerNaming:'/minimal player',
-    plantsNaming:'/PLANTS online store',
-    chocoNaming:'/landing page for small business',
-    csmNaming:'/personal account system for NN CSM'
+    playerNaming: '/minimal player',
+    plantsNaming: '/PLANTS online store',
+    chocoNaming: '/landing page for small business',
+    csmNaming: '/personal account system for NN CSM'
   },
   ru: {
     home: 'главная',
@@ -217,13 +227,13 @@ const translations = {
     asDeveloper: 'как разработчик',
     asArtist: 'как художник',
     aboutMe: 'Меня зовут Никита Вахмянин. Я родился в Нижнем Новгороде и работаю фронтенд-разработчиком. У меня более 2 лет официального опыта работы и дополнительно три года личных проектов. Помимо работы, я увлекаюсь разработкой на Arduino, созданием музыки и 3D-моделированием. Я работаю как индивидуально, так и в команде, используя методологии Agile или SCRUM. Мои профессиональные цели включают постоянное развитие и изучение новых технологий, создание удобных интерфейсов и работу над значимыми проектами.',
-    playerNaming:'/минималистичный аудиосервис',
+    playerNaming: '/минималистичный аудиосервис',
     minimalPlayerDescription: 'В рамках личного проекта я разработал минималистичный музыкальный плеер на Vue 3, используя Spotify в качестве ключевого ориентира. Основная цель проекта - позволить слушателям наслаждаться музыкой в формате FLAC. Помимо Vue, я использовал Electron, что позволило приложению работать не только в браузерах, но и нативно на macOS и Windows. В процессе разработки я приобрел дополнительные навыки в развертывании программного обеспечения на серверах, научился писать бэкенд, проектировать пользовательский интерфейс и работать с алгоритмами сжатия файлов.',
-    csmNaming:'/личный кабинет клиента для "НН ЦСМ"',
+    csmNaming: '/личный кабинет клиента для "НН ЦСМ"',
     csmDescription: 'В рамках этого коммерческого проекта я разработал систему личного кабинета для Нижегородского центра стандартизации и метрологии на Vue 3. Целью было создание удобного интерфейса для клиентов, позволяющего подавать заявки, отслеживать их статус и управлять документами. Система интегрируется с внутренними сервисами организации и предоставляет ролевой доступ для разных категорий пользователей. В процессе разработки я работал со сложной валидацией форм, реализовал обновление статусов в реальном времени и обеспечил совместимость с устаревшими системами, используемыми организацией.',
-    plantsNaming:'/магазин растений',
+    plantsNaming: '/магазин растений',
     plantsDescription: 'Этот личный проект включал создание платформы электронной коммерции для продажи комнатных растений с использованием Vue 3. Магазин включает каталог товаров с фильтрами, корзину покупок и безопасное оформление заказа. Я реализовал интерактивные руководства по уходу за растениями и виртуального "доктора растений", чтобы помочь покупателям ухаживать за своими покупками. Проект позволил мне углубить знания в интеграции платежных систем, управлении запасами и создании адаптивных товарных страниц, одинаково хорошо работающих как на компьютерах, так и на мобильных устройствах.',
-    chocoNaming:'/лендинг для малого бизнеса',
+    chocoNaming: '/лендинг для малого бизнеса',
     chocoDescription: 'Я создал эту целевую страницу для местного шоколатье, чтобы демонстрировать продукцию и привлекать клиентов. Используя Vue 3, я разработал интерактивную галерею продуктов с 3D-просмотром, форму заказа с вариантами доставки и раздел с отзывами клиентов. Страница включает анимационные эффекты для выделения специальных предложений и сезонных продуктов. Этот проект помог мне освоить техники создания высококонверсионных лендингов, которые эффективно представляют предложения малого бизнеса, сохраняя при этом быструю загрузку и SEO-оптимизацию.',
     name: 'имя',
     email: 'почта',
@@ -295,7 +305,7 @@ watch(isLightTheme, (newVal) => {
   if (appElement) {
     appElement.classList.toggle('light-theme', newVal);
   }
-}, { immediate: true });
+}, {immediate: true});
 
 onMounted(() => {
   const savedTheme = localStorage.getItem('theme');
@@ -317,16 +327,17 @@ const themeIcon = computed(() => {
 
 const toggleTheme = () => {
   isLightTheme.value = !isLightTheme.value;
+
+  // Для Safari: временно меняем класс body
+  if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+    document.body.classList.add('force-theme-update');
+    setTimeout(() => {
+      document.body.classList.remove('force-theme-update');
+    }, 0);
+  }
+
   document.documentElement.classList.toggle('light-theme', isLightTheme.value);
   localStorage.setItem('theme', isLightTheme.value ? 'light' : 'dark');
-
-  // Принудительный ререндер для Safari
-  const app = document.getElementById('app');
-  if (app) {
-    app.style.display = 'none';
-    app.offsetHeight; // Триггер рефлоу
-    app.style.display = '';
-  }
 };
 </script>
 
@@ -361,7 +372,7 @@ a, p, nav, span, h1, h2 {
 }
 
 .page .nav {
-  background-color: inherit;
+  background: initial !important;
 }
 
 .page .tags span {
@@ -434,9 +445,11 @@ a, p, nav, span, h1, h2 {
   color: black;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 .page.light-theme .tags span:hover {
   color: white !important;
 }
+
 /* Остальные стили остаются без изменений */
 b {
   color: white;
@@ -678,10 +691,12 @@ b {
   border-radius: 8px;
   background: #222;
 }
+
 .project img:hover {
   box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.15);
   scale: 105%;
 }
+
 .project h3 {
   font-size: 32px;
   font-weight: bold;
@@ -702,12 +717,14 @@ b {
   height: 30px;
   font-family: "Anonymous Pro-Bold", sans-serif;
   font-size: 15px;
-  transition:all 0.2s ease-out;
+  transition: all 0.2s ease-out;
   border: none;
 }
+
 .view_button:hover {
   scale: 105%;
 }
+
 .contacts hr {
   box-shadow: 0 0 24px 4px rgba(255, 255, 255, 0.3);
   border: 3px solid white;
@@ -718,6 +735,7 @@ b {
 :fullscreen .contacts hr {
   margin-top: 70px;
 }
+
 .contacts {
   margin-bottom: 200px;
 }
@@ -733,11 +751,13 @@ b {
 .contacts li span {
   font-weight: bold;
 }
-.contacts li{
+
+.contacts li {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .contacts button {
   margin-left: 10px;
   padding: 2px 10px;
@@ -748,9 +768,10 @@ b {
   height: 30px;
   font-family: "Anonymous Pro-Bold", sans-serif;
   font-size: 15px;
-  transition:all 0.2s ease-out;
+  transition: all 0.2s ease-out;
   border: none;
 }
+
 .page.light-theme ::-webkit-scrollbar-thumb {
   background-color: black !important; /* Чёрный ползунок в светлой теме */
 }
@@ -766,16 +787,27 @@ b {
 }
 
 @media (min-width: 1025px) {
-  .mobile-nav{display: none}
+  .mobile-nav {
+    display: none
+  }
 }
+
 @media (max-width: 1024px) {
+  .page{
+    min-height: 100%;
+    width: unset;
+  }
+  .mobile-nav {
+    transition: background-color 0.3s ease;
+  }
+
   .mobile-nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background: inherit !important;
+    background: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -785,7 +817,7 @@ b {
   }
 
   .page.light-theme .mobile-nav {
-    background: inherit;
+    background: white !important;
     border-bottom: 1px solid #ddd;
   }
 
@@ -880,9 +912,11 @@ b {
   .mobile-menu a:last-child {
     border-bottom: none;
   }
-  .nav{
+
+  .nav {
     display: none;
   }
+
   .page {
     padding: 40px 24px;
   }
@@ -890,56 +924,77 @@ b {
   .projects {
     grid-template-columns: 1fr;
   }
-  .projects h3{
+
+  .projects h3 {
     font-size: 26px;
   }
+
   .intro h1 {
     margin-top: 150px;
     font-size: 48px;
   }
-  .skills hr{
+
+  .skills hr {
     margin-top: 50px;
   }
-  .alias{
-    margin-top: 240px;
+
+  .alias {
+    margin-top: 160px;
   }
-  #skills{margin-bottom: 60px}
-  :fullscreen .skills hr{
+
+  #skills {
+    margin-bottom: 60px
+  }
+
+  :fullscreen .skills hr {
     margin-top: 140px;
   }
-  :fullscreen #skills{
+
+  :fullscreen #skills {
     margin-bottom: 60px;
   }
-  .description{
+
+  .description {
     font-size: 24px;
   }
-  .portfolio hr{
+
+  .portfolio hr {
     margin-top: 50px;
   }
-  :fullscreen .portfolio hr{
+
+  :fullscreen .portfolio hr {
     margin-top: 40px;
   }
-  #portfolio{
+
+  #portfolio {
     margin-bottom: 60px;
   }
-  .portfolio .downarrow{display: none}
-  #contacts{
+
+  .portfolio .downarrow {
+    display: none
+  }
+
+  #contacts {
     margin-bottom: 80px;
   }
-  .contacts ul{
+
+  .contacts ul {
     font-size: 14px;
   }
-  .contacts button{
+
+  .contacts button {
     padding: 2px 5px;
     text-align: center;
     font-size: 12px;
     height: 25px;
     width: 20px;
   }
-  .contacts li{
+
+  .contacts li {
     margin-bottom: 10px;
   }
-  .contacts{
+
+  .contacts {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
