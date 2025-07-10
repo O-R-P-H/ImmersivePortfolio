@@ -1,12 +1,12 @@
 <template>
   <div class="page" :class="{ 'light-theme': isLightTheme }">
     <header class="nav">
-      <span class="lang">eng</span>
+      <span class="lang" @click="toggleLanguage">{{ currentLanguage }}</span>
       <nav class="left_nav">
-        <a href="">home</a>
-        <a href="#skills">skills</a>
-        <a href="#portfolio">portfolio</a>
-        <a href="#contacts">contacts</a>
+        <a href="">{{ t('home') }}</a>
+        <a href="#skills">{{ t('skills') }}</a>
+        <a href="#portfolio">{{ t('portfolio') }}</a>
+        <a href="#contacts">{{ t('contacts') }}</a>
         <img
             :src="themeIcon"
             alt="toggle theme"
@@ -16,7 +16,7 @@
       </nav>
     </header>
     <header class="mobile-nav">
-      <span class="lang">eng</span>
+      <span class="lang" @click="toggleLanguage">{{ currentLanguage }}</span>
 
       <!-- Кнопка бургер-меню -->
       <button class="menu-toggle" @click="toggleMenu">
@@ -27,10 +27,10 @@
 
       <!-- Выпадающее меню -->
       <nav class="mobile-menu" :class="{'open': isMenuOpen}">
-        <a href="" @click="closeMenu">home</a>
-        <a href="#skills" @click="closeMenu">skills</a>
-        <a href="#portfolio" @click="closeMenu">portfolio</a>
-        <a href="#contacts" @click="closeMenu">contacts</a>
+        <a href="" @click="closeMenu">{{ t('home') }}</a>
+        <a href="#skills" @click="closeMenu">{{ t('skills') }}</a>
+        <a href="#portfolio" @click="closeMenu">{{ t('portfolio') }}</a>
+        <a href="#contacts" @click="closeMenu">{{ t('contacts') }}</a>
       </nav>
 
       <!-- Иконка темы -->
@@ -45,10 +45,10 @@
     <main>
       <section class="intro">
         <h1>Nikita<br/>Vakhmianin</h1>
-        <p class="role">frontend—developer</p>
+        <p class="role">{{ t('frontendDeveloper') }}</p>
         <p class="alias">
-          also known as <b>O_R_P_H</b> as a developer<br/>
-          also known as <b>tsukawa</b> as an artist
+          {{ t('alsoKnownAs') }} <b>O_R_P_H</b> {{ t('asDeveloper') }}<br/>
+          {{ t('alsoKnownAs') }} <b>tsukawa</b> {{ t('asArtist') }}
         </p>
       </section>
 
@@ -60,7 +60,7 @@
           </div>
         </a>
         <div id="skills" style="height: 10px"></div>
-        <h2>skills</h2>
+        <h2>{{ t('skills') }}</h2>
         <div class="tags">
           <span
               style="padding-left: 56px;padding-right: 56px">OOP</span><span>SOLID-Principles</span><span>Java Script</span>
@@ -69,11 +69,7 @@
           <span>GIT</span><span>HTML</span><span>CSS</span>
         </div>
         <p class="description">
-          My name is Nikita Vakhmianin. I was born in Nizhny Novgorod and work as a frontend developer. I have over a 2
-          years of official work experience and an additional three years of personal projects. Besides work, I am
-          passionate about Arduino development, making music, and 3D modeling. I work both individually and in a team
-          using the Agile or SCRUM methodology. My professional goals include continuous development and learning new
-          technologies, creating user-friendly interfaces, and working on meaningful projects.
+          {{ t('aboutMe') }}
         </p>
       </section>
 
@@ -85,40 +81,33 @@
           </div>
         </a>
         <div id="portfolio" style="height: 10px"></div>
-        <h2>portfolio</h2>
+        <h2>{{ t('portfolio') }}</h2>
         <div class="projects">
           <div class="project">
             <img src="../../src/assets/img/minplayer.png" alt="Minimal Player Screenshot"/>
-            <div style="display: flex; align-items: center;max-width: 540px; justify-content: space-between;">
-              <h3>/minimal player</h3>
-              <a target="_blank" href="https://diplom.tsukawa.ru"><button class="view_button">view</button></a>
+            <div style="display: flex; align-items: flex-start;max-width: 540px; justify-content: space-between;">
+              <h3>{{ t('playerNaming') }}</h3>
+              <a target="_blank" href="https://diplom.tsukawa.ru"><button class="view_button">{{ t('view') }}</button></a>
             </div>
-            <p>As part of my pet project, I developed a minimalist music player using Vue 3, using Spotify as a key
-              reference. The main goal of the project was to allow listeners to enjoy music in FLAC format. In addition
-              to Vue, I utilized Electron, enabling the application to run not only in browsers but also natively on
-              macOS and Windows. During the development, I gained additional skills in deploying my software on servers,
-              learned to write the backend, designed the user interface, and worked with file compression
-              algorithms.</p>
+            <p>{{ t('minimalPlayerDescription') }}</p>
           </div>
           <div class="project">
             <img src="../../src/assets/img/CSM_prj.png" alt="Minimal Player Screenshot"/>
             <div style="display: flex;max-width: 540px; align-items: flex-start; justify-content: space-between;">
-              <h3 style="max-width: 420px">/personal account system for NN CSM</h3>
-              <a href="https://lk.nncsm.ru/" target="_blank"><button class="view_button">view</button></a>
+              <h3 style="max-width: 420px">{{ t('csmNaming') }}</h3>
+              <a href="https://lk.nncsm.ru/" target="_blank"><button class="view_button">{{ t('view') }}</button></a>
             </div>
-            <p>As part of this commercial project, I developed a personal account system for the Nizhny Novgorod Center for Standardization and Metrology using Vue 3. The goal was to create a convenient interface for clients to submit applications, track their status, and manage documents. The system integrates with the organization's internal services and provides role-based access for different user categories. During development, I worked with complex form validation, implemented real-time status updates, and ensured compatibility with legacy systems used by the organization.
-
-            </p>
+            <p>{{ t('csmDescription') }}</p>
           </div>
           <div class="project">
             <img src="../../src/assets/img/plants_prj.png" alt="Minimal Player Screenshot"/>
-            <h3>/PLANTS online store</h3>
-            <p>This pet project involved creating an e-commerce platform for selling houseplants using Vue 3. The store features product catalog with filters, shopping cart, and secure checkout. I implemented interactive plant care guides and a virtual "plant doctor" to help customers maintain their purchases. The project allowed me to deepen my knowledge of payment system integration, inventory management, and creating responsive product pages that work equally well on desktop and mobile devices.</p>
+            <h3>{{ t('plantsNaming') }}</h3>
+            <p>{{ t('plantsDescription') }}</p>
           </div>
           <div class="project">
             <img src="../../src/assets/img/choco_prj.png" alt="Minimal Player Screenshot"/>
-            <h3 style="max-width: 540px">/landing page for small business</h3>
-            <p>I created this landing page for a local chocolate artisan to showcase products and attract customers. Using Vue 3, I developed an interactive product gallery with 3D views, an order form with delivery options, and a section for customer testimonials. The page includes animation effects to highlight special offers and seasonal products. This project helped me master techniques for creating high-converting landing pages that effectively present small business offerings while maintaining fast load times and SEO optimization.</p>
+            <h3 style="max-width: 540px">{{ t('chocoNaming') }}</h3>
+            <p>{{ t('chocoDescription') }}</p>
           </div>
         </div>
       </section>
@@ -130,46 +119,44 @@
           </div>
         </a>
         <div id="contacts"></div>
-        <h2>contacts</h2>
+        <h2>{{ t('contacts') }}</h2>
         <ul>
           <li>
             <div>
-              <span>&gt; name:</span> Nikita Vakhmianin
-
+              <span>&gt; {{ t('name') }}:</span> Nikita Vakhmianin
             </div>
-            <button @click="(e) => copyToClipboard('Nikita Vakhmianin', e)">copy</button>
+            <button @click="(e) => copyToClipboard('Nikita Vakhmianin', e)">{{ t('copy') }}</button>
           </li>
           <li>
             <div>
-              <span>&gt; email:</span> nikitavahmanin@gmail.com
+              <span>&gt; {{ t('email') }}:</span> nikitavahmanin@gmail.com
             </div>
-            <a href="mailto:nikitavahmanin@gmail.com?subject=Contact%20from%20portfolio" ><button>write</button></a>
+            <a href="mailto:nikitavahmanin@gmail.com?subject=Contact%20from%20portfolio" ><button>{{ t('write') }}</button></a>
           </li>
           <li>
             <div>
-              <span>&gt; telegram:</span> @O_R_P_H
+              <span>&gt; {{ t('telegram') }}:</span> @O_R_P_H
             </div>
             <a href="https://t.me/O_R_P_H"
                target="_blank"
-               rel="noopener noreferrer"> <button>write</button></a>
+               rel="noopener noreferrer"> <button>{{ t('write') }}</button></a>
           </li>
           <li>
-            <div><span>&gt; github:</span> github.com/O-R-P-H</div>
+            <div><span>&gt; {{ t('github') }}:</span> github.com/O-R-P-H</div>
             <a href="https://github.com/O-R-P-H"
                target="_blank"
                rel="noopener noreferrer"
-               class="contact-button"><button>view</button></a>
-          </li>
-          <li>
-           <div>
-             <span>&gt; location:</span> Nizhny Novgorod, Russia
-
-           </div>
-            <button @click="(e) => copyToClipboard('Nizhny Novgorod, Russia', e)">copy</button>
+               class="contact-button"><button>{{ t('view') }}</button></a>
           </li>
           <li>
             <div>
-              <span>&gt; availability:</span> open to remote work / freelance
+              <span>&gt; {{ t('location') }}:</span> Nizhny Novgorod, Russia
+            </div>
+            <button @click="(e) => copyToClipboard('Nizhny Novgorod, Russia', e)">{{ t('copy') }}</button>
+          </li>
+          <li>
+            <div>
+              <span>&gt; {{ t('availability') }}:</span> {{ t('availabilityText') }}
             </div></li>
         </ul>
       </section>
@@ -183,9 +170,77 @@ import { ref, computed, onMounted, watch } from 'vue';
 import CRTOverlay from "./components/CRTOverlay.vue";
 
 const isLightTheme = ref(false);
-
-
 const isMenuOpen = ref(false);
+const currentLanguage = ref('eng');
+
+const translations = {
+  eng: {
+    home: 'home',
+    skills: 'skills',
+    portfolio: 'portfolio',
+    contacts: 'contacts',
+    frontendDeveloper: 'frontend—developer',
+    alsoKnownAs: 'also known as',
+    asDeveloper: 'as a developer',
+    asArtist: 'as an artist',
+    aboutMe: 'My name is Nikita Vakhmianin. I was born in Nizhny Novgorod and work as a frontend developer. I have over a 2 years of official work experience and an additional three years of personal projects. Besides work, I am passionate about Arduino development, making music, and 3D modeling. I work both individually and in a team using the Agile or SCRUM methodology. My professional goals include continuous development and learning new technologies, creating user-friendly interfaces, and working on meaningful projects.',
+    minimalPlayerDescription: 'As part of my pet project, I developed a minimalist music player using Vue 3, using Spotify as a key reference. The main goal of the project was to allow listeners to enjoy music in FLAC format. In addition to Vue, I utilized Electron, enabling the application to run not only in browsers but also natively on macOS and Windows. During the development, I gained additional skills in deploying my software on servers, learned to write the backend, designed the user interface, and worked with file compression algorithms.',
+    csmDescription: 'As part of this commercial project, I developed a personal account system for the Nizhny Novgorod Center for Standardization and Metrology using Vue 3. The goal was to create a convenient interface for clients to submit applications, track their status, and manage documents. The system integrates with the organization\'s internal services and provides role-based access for different user categories. During development, I worked with complex form validation, implemented real-time status updates, and ensured compatibility with legacy systems used by the organization.',
+    plantsDescription: 'This pet project involved creating an e-commerce platform for selling houseplants using Vue 3. The store features product catalog with filters, shopping cart, and secure checkout. I implemented interactive plant care guides and a virtual "plant doctor" to help customers maintain their purchases. The project allowed me to deepen my knowledge of payment system integration, inventory management, and creating responsive product pages that work equally well on desktop and mobile devices.',
+    chocoDescription: 'I created this landing page for a local chocolate artisan to showcase products and attract customers. Using Vue 3, I developed an interactive product gallery with 3D views, an order form with delivery options, and a section for customer testimonials. The page includes animation effects to highlight special offers and seasonal products. This project helped me master techniques for creating high-converting landing pages that effectively present small business offerings while maintaining fast load times and SEO optimization.',
+    name: 'name',
+    email: 'email',
+    telegram: 'telegram',
+    github: 'github',
+    location: 'location',
+    availability: 'availability',
+    availabilityText: 'open to remote work / freelance',
+    view: 'view',
+    write: 'write',
+    copy: 'copy',
+    playerNaming:'/minimal player',
+    plantsNaming:'/PLANTS online store',
+    chocoNaming:'/landing page for small business',
+    csmNaming:'/personal account system for NN CSM'
+  },
+  ru: {
+    home: 'главная',
+    skills: 'навыки',
+    portfolio: 'портфолио',
+    contacts: 'контакты',
+    frontendDeveloper: 'фронтенд-разработчик',
+    alsoKnownAs: 'также известен как',
+    asDeveloper: 'как разработчик',
+    asArtist: 'как художник',
+    aboutMe: 'Меня зовут Никита Вахмянин. Я родился в Нижнем Новгороде и работаю фронтенд-разработчиком. У меня более 2 лет официального опыта работы и дополнительно три года личных проектов. Помимо работы, я увлекаюсь разработкой на Arduino, созданием музыки и 3D-моделированием. Я работаю как индивидуально, так и в команде, используя методологии Agile или SCRUM. Мои профессиональные цели включают постоянное развитие и изучение новых технологий, создание удобных интерфейсов и работу над значимыми проектами.',
+    playerNaming:'/минималистичный аудиосервис',
+    minimalPlayerDescription: 'В рамках личного проекта я разработал минималистичный музыкальный плеер на Vue 3, используя Spotify в качестве ключевого ориентира. Основная цель проекта - позволить слушателям наслаждаться музыкой в формате FLAC. Помимо Vue, я использовал Electron, что позволило приложению работать не только в браузерах, но и нативно на macOS и Windows. В процессе разработки я приобрел дополнительные навыки в развертывании программного обеспечения на серверах, научился писать бэкенд, проектировать пользовательский интерфейс и работать с алгоритмами сжатия файлов.',
+    csmNaming:'/личный кабинет клиента для "НН ЦСМ"',
+    csmDescription: 'В рамках этого коммерческого проекта я разработал систему личного кабинета для Нижегородского центра стандартизации и метрологии на Vue 3. Целью было создание удобного интерфейса для клиентов, позволяющего подавать заявки, отслеживать их статус и управлять документами. Система интегрируется с внутренними сервисами организации и предоставляет ролевой доступ для разных категорий пользователей. В процессе разработки я работал со сложной валидацией форм, реализовал обновление статусов в реальном времени и обеспечил совместимость с устаревшими системами, используемыми организацией.',
+    plantsNaming:'/магазин растений',
+    plantsDescription: 'Этот личный проект включал создание платформы электронной коммерции для продажи комнатных растений с использованием Vue 3. Магазин включает каталог товаров с фильтрами, корзину покупок и безопасное оформление заказа. Я реализовал интерактивные руководства по уходу за растениями и виртуального "доктора растений", чтобы помочь покупателям ухаживать за своими покупками. Проект позволил мне углубить знания в интеграции платежных систем, управлении запасами и создании адаптивных товарных страниц, одинаково хорошо работающих как на компьютерах, так и на мобильных устройствах.',
+    chocoNaming:'/лендинг для малого бизнеса',
+    chocoDescription: 'Я создал эту целевую страницу для местного шоколатье, чтобы демонстрировать продукцию и привлекать клиентов. Используя Vue 3, я разработал интерактивную галерею продуктов с 3D-просмотром, форму заказа с вариантами доставки и раздел с отзывами клиентов. Страница включает анимационные эффекты для выделения специальных предложений и сезонных продуктов. Этот проект помог мне освоить техники создания высококонверсионных лендингов, которые эффективно представляют предложения малого бизнеса, сохраняя при этом быструю загрузку и SEO-оптимизацию.',
+    name: 'имя',
+    email: 'почта',
+    telegram: 'telegram',
+    github: 'github',
+    location: 'местоположение',
+    availability: 'доступность',
+    availabilityText: 'открыт для удаленной работы / фриланса',
+    view: 'посмотреть',
+    write: 'написать',
+    copy: 'копировать',
+  }
+};
+
+const t = (key) => {
+  return translations[currentLanguage.value][key] || key;
+};
+
+const toggleLanguage = () => {
+  currentLanguage.value = currentLanguage.value === 'eng' ? 'ru' : 'eng';
+};
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -194,26 +249,22 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false;
 };
+
 const copyToClipboard = (text, event) => {
   const button = event?.currentTarget;
 
   if (button) {
-    // Сохраняем оригинальный текст кнопки
     const originalText = button.textContent;
-
-    // Меняем текст кнопки
-    button.textContent = 'copied!';
-    button.style.background = '#64c24d'; // Зеленый цвет для успеха
+    button.textContent = currentLanguage.value === 'eng' ? 'copied!' : 'скопировано!';
+    button.style.background = '#64c24d';
     button.style.color = 'white';
 
-    // Копируем текст в буфер обмена
     navigator.clipboard.writeText(text)
         .then(() => {
           console.log('Copied to clipboard:', text);
         })
         .catch(err => {
           console.error('Failed to copy:', err);
-          // Fallback для старых браузеров
           const textarea = document.createElement('textarea');
           textarea.value = text;
           document.body.appendChild(textarea);
@@ -227,7 +278,6 @@ const copyToClipboard = (text, event) => {
           }
         });
 
-    // Возвращаем оригинальный текст через 2 секунды
     setTimeout(() => {
       button.textContent = originalText;
       button.style.background = '';
@@ -236,9 +286,6 @@ const copyToClipboard = (text, event) => {
   }
 };
 
-
-
-// Обработчик темы для корневого элемента
 watch(isLightTheme, (newVal) => {
   const appElement = document.getElementById('app');
   if (appElement) {
@@ -246,14 +293,12 @@ watch(isLightTheme, (newVal) => {
   }
 }, { immediate: true });
 
-// Проверяем сохраненную тему при загрузке
 onMounted(() => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
     isLightTheme.value = savedTheme === 'light';
   }
 
-  // Инициализация темы для корневого элемента
   const appElement = document.getElementById('app');
   if (appElement) {
     appElement.classList.toggle('light-theme', isLightTheme.value);
@@ -268,11 +313,9 @@ const themeIcon = computed(() => {
 
 const toggleTheme = () => {
   isLightTheme.value = !isLightTheme.value;
-  // Добавляем/удаляем класс к html элементу
   document.documentElement.classList.toggle('light-theme', isLightTheme.value);
   localStorage.setItem('theme', isLightTheme.value ? 'light' : 'dark');
 };
-
 </script>
 
 <style scoped>
@@ -641,9 +684,10 @@ b {
 }
 
 .view_button {
+  padding: 2px 10px;
   cursor: pointer;
   border-radius: 6px;
-  width: 60px;
+  min-width: 60px;
   height: 30px;
   font-family: "Anonymous Pro-Bold", sans-serif;
   font-size: 15px;
@@ -689,7 +733,7 @@ b {
   cursor: pointer;
   border-radius: 6px;
   text-align: center;
-  width: 80px;
+  min-width: 100px;
   height: 30px;
   font-family: "Anonymous Pro-Bold", sans-serif;
   font-size: 15px;
@@ -835,7 +879,9 @@ b {
   .projects {
     grid-template-columns: 1fr;
   }
-
+   .projects h3{
+     font-size: 26px;
+   }
   .intro h1 {
     margin-top: 150px;
     font-size: 48px;
@@ -877,10 +923,15 @@ b {
     text-align: center;
     font-size: 12px;
     height: 25px;
-    width: 60px;
+    width: 20px;
   }
   .contacts li{
-    margin-bottom: 3px;
+    margin-bottom: 10px;
+  }
+  .contacts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 </style>
