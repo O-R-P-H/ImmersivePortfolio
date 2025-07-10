@@ -319,6 +319,14 @@ const toggleTheme = () => {
   isLightTheme.value = !isLightTheme.value;
   document.documentElement.classList.toggle('light-theme', isLightTheme.value);
   localStorage.setItem('theme', isLightTheme.value ? 'light' : 'dark');
+
+  // Принудительный ререндер для Safari
+  const app = document.getElementById('app');
+  if (app) {
+    app.style.display = 'none';
+    app.offsetHeight; // Триггер рефлоу
+    app.style.display = '';
+  }
 };
 </script>
 
