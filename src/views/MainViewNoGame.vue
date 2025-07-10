@@ -100,7 +100,7 @@
             <p>{{ t('csmDescription') }}</p>
           </div>
           <div class="project">
-            <img :src="plantImage" alt="Minimal Player Screenshot"/>
+            <img src="../../src/assets/img/plants_prj.png" alt="Minimal Player Screenshot"/>
             <h3>{{ t('plantsNaming') }}</h3>
             <p>{{ t('plantsDescription') }}</p>
           </div>
@@ -338,7 +338,6 @@ a, p, nav, span, h1, h2 {
 
 .page {
   height: 100%;
-  max-width: 1440px;
   margin: 0 auto;
   font-family: 'Anonymous Pro', monospace;
   padding-left: 5vw;
