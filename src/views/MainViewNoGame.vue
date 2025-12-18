@@ -1,9 +1,9 @@
 <template>
   <div class="page" :class="{ 'light-theme': isLightTheme }">
-    <header class="nav">
+    <header  class="nav">
       <span class="lang" @click="toggleLanguage">{{ currentLanguage }}</span>
       <nav class="left_nav">
-        <a href="">{{ t('home') }}</a>
+        <a  href="#home">{{ t('home') }}</a>
         <a href="#skills">{{ t('skills') }}</a>
         <a href="#portfolio">{{ t('portfolio') }}</a>
         <a href="#contacts">{{ t('contacts') }}</a>
@@ -27,7 +27,7 @@
 
       <!-- Выпадающее меню -->
       <nav class="mobile-menu" :class="{'open': isMenuOpen}">
-        <a href="" @click="closeMenu">{{ t('home') }}</a>
+        <a href="#home" @click="closeMenu">{{ t('home') }}</a>
         <a href="#skills" @click="closeMenu">{{ t('skills') }}</a>
         <a href="#portfolio" @click="closeMenu">{{ t('portfolio') }}</a>
         <a href="#contacts" @click="closeMenu">{{ t('contacts') }}</a>
@@ -43,7 +43,7 @@
     </header>
 
     <main>
-      <section class="intro">
+      <section id="home"  class="intro">
         <h1>Nikita<br/>Vakhmianin</h1>
         <p class="role">{{ t('frontendDeveloper') }}</p>
         <p class="alias">
@@ -182,7 +182,8 @@ import CRTOverlay from "./components/CRTOverlay.vue";
 import toggleWhite from '@/assets/img/switch_theme_white.svg';
 import toggleBlack from '@/assets/img/switch_theme_black.svg';
 
-
+import switchThemeWhite from '@/assets/img/switch_theme_white.svg';
+import switchThemeBlack from '@/assets/img/switch_theme_black.svg';
 const isLightTheme = ref(false);
 const isMenuOpen = ref(false);
 const currentLanguage = ref('eng');
