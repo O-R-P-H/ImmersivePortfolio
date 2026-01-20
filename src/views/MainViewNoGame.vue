@@ -7,6 +7,7 @@
         <a href="#skills">{{ t('skills') }}</a>
         <a href="#portfolio">{{ t('portfolio') }}</a>
         <a href="#contacts">{{ t('contacts') }}</a>
+        <a href="/osh">OSH</a>
         <img
             :src="themeIcon"
             alt="toggle theme"
